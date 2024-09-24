@@ -1,0 +1,20 @@
+/* Aumentar el tamaño de la fuente de los nombres de las categorías */
+.category-name {
+    font-size: 1.2rem; /* Puedes ajustar el tamaño según tus necesidades */
+    font-weight: bold;
+  }
+  
+  /* Achicar la sección de "Agregar Actividad" */
+  .add-activity-section {
+    font-size: 0.9rem; /* Reduce el tamaño del texto */
+    padding: 10px; /* Ajusta el espaciado interno */
+    border: 1px solid #ddd; /* Añade un borde delgado */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #f8f9fa; /* Fondo ligeramente gris */
+    margin-bottom: 15px; /* Espaciado inferior */
+  }
+  
+  .add-activity-section h5 {
+    font-size: 1rem; /* Ajusta el tamaño del título "Agregar Actividad" */
+  }
+  

@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <ngb-carousel *ngIf="images && images.length > 0" >
+    <ng-template ngbSlide *ngFor="let image of images">
+      <img [src]="image.url" alt="Imagen del carrusel" class="d-block w-100" style="height: 50%; object-fit: contain;" />
+    </ng-template>
+  </ngb-carousel>
+</div>
+<div class="card">
+  <div class="card-header text-center">
+    <h2>Descubre tu hobby!</h2>
+    <button> <a class="nav-link" [routerLink]="['/categories']">Ver más</a> </button>
+  </div>
+</div>
+<div class="container mt-4">
+  <h3>Anuncios de empresas</h3>
+  <ngb-carousel *ngIf="advertisements && advertisements.length > 0" [interval]="3000"> <!-- El tiempo en milisegundos -->
+    <ng-template ngbSlide *ngFor="let ad of advertisements">
+      <img [src]="ad.imageUrl" alt="Publicidad" class="d-block w-100" style="height: 50%; object-fit: contain;" />
+      <div class="carousel-caption d-none d-md-block">
+        <h5>{{ ad.title }}</h5>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</div>

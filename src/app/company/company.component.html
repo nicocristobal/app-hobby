@@ -1,0 +1,79 @@
+<div class="container mt-4">
+  <h2>Gestión de actividades</h2>
+
+  <!-- Formulario para agregar nueva actividad -->
+  <div class="mb-4">
+    <h4>Agregar Nueva Actividad</h4>
+    <form (ngSubmit)="addActivity()">
+      <div class="form-group">
+        <label for="name">Nombre Actividad</label>
+        <input type="text" id="name" [(ngModel)]="newActivity.name" name="name" class="form-control" placeholder="Nombre de la actividad" required>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Descripción</label>
+        <textarea id="description" [(ngModel)]="newActivity.description" name="description" class="form-control" placeholder="Descripción" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="category">Categoría</label>
+        <select id="category" [(ngModel)]="newActivity.categoryId" name="category" class="form-control" required>
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+        </select>
+      </div>
+
+      <!-- Campo de fecha -->
+      <div class="form-group">
+        <label for="date">Fecha</label>
+        <input type="date" id="date" [(ngModel)]="newActivity.date" [min]="today" name="date" class="form-control" required>
+      </div>
+
+      <!-- Campo de hora -->
+      <div class="form-group">
+        <label for="time">Hora</label>
+        <input type="time" id="time" [(ngModel)]="newActivity.time" name="time" class="form-control" required>
+      </div>
+
+      <button type="submit" class="btn btn-success">Agregar Actividad</button>
+    </form>
+  </div>
+
+  <!-- Listado de actividades de la empresa, por categoría -->
+  <!-- Listado de actividades de la empresa, por categoría -->
+<div class="mt-4">
+  <h4>Mis Actividades</h4>
+
+  <!-- Itera sobre las categorías -->
+  <div *ngFor="let category of categories" class="mb-4">
+    <h5>{{ category.name }}</h5>
+
+    <!-- Si hay actividades en la categoría, muestra la tabla -->
+    <table class="table" *ngIf="activitiesByCategory[category.id] && activitiesByCategory[category.id].length > 0">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Acciones</th> <!-- Nueva columna para las acciones -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let activity of getActivitiesByCategory(category.id)">
+          <td>{{ activity.name }}</td>
+          <td>{{ activity.description }}</td>
+          <td>{{ activity.date | date }}</td>
+          <td>{{ activity.time }}</td>
+          <td><button (click)="deleteActivity(activity.id, category.id)">Eliminar</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Si no hay actividades en esta categoría -->
+    <p *ngIf="!activitiesByCategory[category.id] || activitiesByCategory[category.id].length === 0">
+      No hay actividades en esta categoría.
+    </p>
+  </div>
+</div>
+
+</div>
