@@ -1,0 +1,34 @@
+<div class="container mt-4">
+    <h2>Gestión de usuarios</h2>
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Rol actual</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.displayName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <button *ngIf="user.role !== 'empresa'" 
+                    class="btn btn-primary btn-sm"
+                    (click)="changeUserRole(user.uid, 'empresa')">Autorizar como Empresa</button>
+  
+            <button *ngIf="user.role === 'empresa'" 
+                    class="btn btn-warning btn-sm"
+                    (click)="changeUserRole(user.uid, 'user')">Revocar Empresa</button>
+  
+            <button *ngIf="user.role !== 'admin'" 
+                    class="btn btn-danger btn-sm"
+                    (click)="deleteUser(user.uid)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>

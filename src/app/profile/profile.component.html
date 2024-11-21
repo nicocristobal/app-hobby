@@ -1,0 +1,45 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header text-center">
+      <h2>Mi Perfil</h2>
+    </div>
+    <div class="card-body">
+      <form (submit)="updateProfile()">
+        <div class="form-group">
+          <label for="displayName">Nombre</label>
+          <input type="text" id="displayName" [(ngModel)]="newDisplayName" name="displayName" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Actualizar Nombre</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Mostrar Actividades Favoritas -->
+  <div class="card mt-4">
+    <div class="card-header text-center">
+      <h3>Mis Actividades Favoritas</h3>
+    </div>
+    <div class="card-body">
+      <!-- Mostrar mensaje si no hay actividades -->
+      <div *ngIf="favoriteActivities.length === 0" class="text-center">
+        <p>No tienes actividades favoritas aún.</p>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let activity of favoriteActivities">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5>{{ activity.name }}</h5>
+              <p>{{ activity.description }}</p>
+              <p><strong>Fecha:</strong> {{ activity.date | date: 'shortDate' }} <strong>Hora:</strong> {{ activity.time }}</p>
+            </div>
+            <!-- Botón de eliminar con indicador de carga -->
+            <button class="btn btn-danger" (click)="removeActivity(activity)" [disabled]="isLoading">
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              <span *ngIf="!isLoading">Eliminar</span>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

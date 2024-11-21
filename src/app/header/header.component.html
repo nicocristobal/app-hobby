@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Agregar el icono antes del texto -->
+  <a class="navbar-brand" href="#">
+    <img src="assets/image/Designer.ico" width="30" height="30" class="d-inline-block align-top" alt="Logo">
+    Descubre tu hobby!
+  </a>
+
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <!-- Mostrar el nombre del usuario si está autenticado -->
+      <li *ngIf="currentUser" class="nav-item">
+        <a class="nav-link" href="#">Hola, {{ currentUser.displayName }}</a>
+      </li>
+
+      <!-- Enlace a "Mi Perfil" para usuarios autenticados -->
+      <li *ngIf="currentUser" class="nav-item">
+        <a class="nav-link" [routerLink]="['/profile']">Mi Perfil</a>
+      </li>
+
+      <!-- Enlace a "Página Principal" solo para administradores -->
+      <li *ngIf="isAdmin" class="nav-item">
+        <a class="nav-link" [routerLink]="['/categories']">Página Principal</a>
+      </li>
+
+      <!-- Enlace a "Página Principal" solo para Empresas -->
+      <li *ngIf="isCompany" class="nav-item">
+        <a class="nav-link" [routerLink]="['/categories']">Página Principal</a>
+      </li>
+
+      <!-- Enlace a "Admin" solo para administradores -->
+      <li *ngIf="isAdmin" class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin']">Administración</a>
+      </li>
+
+      <!-- Enlace a "GestiónActividades" solo para Empresas -->
+      <li *ngIf="isCompany" class="nav-item">
+        <a class="nav-link" [routerLink]="['/company']">Gestion de Actividades</a>
+      </li>
+
+      <!-- Enlace a "Home" solo para administradores -->
+      <li *ngIf="isAdmin" class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin/image']">Actualizar Home</a>
+      </li>
+
+      <!-- Enlace a "Rol de user" solo para administradores -->
+      <li *ngIf="isAdmin" class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin/user-management']">Gestión Usuarios</a>
+      </li>
+
+      <!-- Enlace a "Publicidad" solo para empresas -->
+      <li *ngIf="isCompany" class="nav-item">
+        <a class="nav-link" [routerLink]="['/company/advertising']">Publicidad</a>
+      </li>
+
+      <!-- Cerrar sesión para usuarios autenticados -->
+      <li *ngIf="currentUser" class="nav-item">
+        <a class="nav-link" (click)="logout()">Cerrar Sesión</a>
+      </li>
+
+      <!-- Mostrar "Iniciar Sesión" si el usuario no está autenticado -->
+      <li *ngIf="!currentUser" class="nav-item">
+        <a class="nav-link" [routerLink]="['/login']">Iniciar Sesión</a>
+      </li>
+    </ul>
+  </div>
+</nav>

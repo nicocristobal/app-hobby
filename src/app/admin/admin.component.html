@@ -1,0 +1,65 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Administración de Categorías y Actividades</h2>
+
+  <!-- Agregar Categoría -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h3>Agregar Categoría</h3>
+    </div>
+    <div class="card-body">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" [(ngModel)]="newCategoryName" placeholder="Nombre de la categoría">
+      </div>
+      <!-- Campo de carga de imagen -->
+      <div class="input-group mb-3">
+        <input type="file" class="form-control" (change)="onFileSelected($event)" accept="image/*">
+      </div>
+      <button class="btn btn-primary" (click)="addCategory()">Agregar Categoría</button>
+    </div>
+  </div>
+
+  <!-- Lista de Categorías -->
+  <div class="card">
+    <div class="card-header">
+      <h3>Categorías Existentes</h3>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let category of categories">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <!-- Mostrar imagen de categoría si existe -->
+            <img *ngIf="category.imageUrl" [src]="category.imageUrl" alt="{{ category.name }}" class="img-thumbnail me-2" style="width: 50px; height: 50px;">
+            <strong class="category-name">{{ category.name }}</strong> <!-- Agrandar el texto de las categorías -->
+          </div>
+          <button class="btn btn-danger btn-sm" (click)="deleteCategory(category.id)">Eliminar Categoría</button>
+        </div>
+
+        <!-- Agregar Actividad a la Categoría -->
+        <div class="mt-3 add-activity-section"> <!-- Achicar la sección de "Agregar Actividad" -->
+          <h5>Agregar Actividad</h5>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" [(ngModel)]="newActivity.name" placeholder="Nombre de la actividad">
+            <input type="text" class="form-control" [(ngModel)]="newActivity.description" placeholder="Descripción de la actividad">
+          </div>
+          
+          <!-- Campos para ingresar la fecha y hora de la actividad -->
+          <div class="input-group mb-3">
+            <input type="date" class="form-control" [(ngModel)]="newActivity.date" [min]="today">
+            <input type="time" class="form-control" [(ngModel)]="newActivity.time">
+          </div>
+          
+          <!-- Botón para agregar actividad -->
+          <button class="btn btn-success btn-sm" (click)="newActivity.categoryId = category.id; addActivity()">Agregar</button>
+
+          <!-- Lista de Actividades -->
+          <ul class="list-group mt-2">
+            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let activity of category.activities">
+              {{ activity.name }} - {{ activity.description }} - {{ activity.date | date: 'shortDate' }} {{ activity.time }}
+              <button class="btn btn-danger btn-sm" (click)="deleteActivity(category.id, activity.id)">Eliminar Actividad</button>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="container mt-4">
+    <h4>Agregar Publicidad</h4>
+  
+    <!-- Formulario para agregar publicidad -->
+    <form (ngSubmit)="uploadAd()">
+      <div class="form-group">
+        <label for="title">Título de la Publicidad</label>
+        <input type="text" id="title" [(ngModel)]="advertisement.title" name="title" class="form-control" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="image">Seleccionar Imagen</label>
+        <input type="file" id="image" (change)="onFileSelected($event)" class="form-control" accept="image/*" required>
+      </div>
+  
+      <!-- Mostrar progreso de la subida -->
+      <div *ngIf="uploadProgress !== null">
+        <p>Subiendo: {{ uploadProgress | number }}%</p>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="!selectedImage">Subir Publicidad</button>
+    </form>
+  
+    <!-- Mostrar la lista de publicidades -->
+    <div class="mt-5">
+      <h4>Publicidades Actuales</h4>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Imagen</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ad of advertisements">
+            <td>{{ ad.title }}</td>
+            <td><img [src]="ad.imageUrl" alt="{{ ad.title }}" width="100"></td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteAd(ad.id, ad.imageUrl)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

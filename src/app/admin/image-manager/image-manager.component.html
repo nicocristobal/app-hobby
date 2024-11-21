@@ -1,0 +1,38 @@
+<div class="container mt-4">
+    <!-- Tarjeta para subir una nueva imagen al carrusel -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h3>Agregar Imagen al Carrusel</h3>
+      </div>
+      <div class="card-body">
+        <!-- Campo para seleccionar la imagen -->
+        <div class="input-group mb-3">
+          <input type="file" class="form-control" (change)="onFileSelected($event)" accept="image/*">
+        </div>
+        <!-- Botón para subir la imagen -->
+        <button class="btn btn-primary" (click)="uploadImage()" [disabled]="!selectedFile">Subir Imagen</button>
+      </div>
+    </div>
+  
+    <!-- Tarjeta para mostrar las imágenes existentes en el carrusel -->
+    <div class="card">
+      <div class="card-header">
+        <h3>Imágenes del Carrusel</h3>
+      </div>
+      <ul class="list-group list-group-flush">
+        <!-- Iterar sobre la lista de imágenes cargadas -->
+        <li class="list-group-item" *ngFor="let image of images">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <!-- Mostrar imagen del carrusel -->
+              <img [src]="image.url" alt="Imagen del carrusel" class="img-thumbnail me-2" style="width: 50px; height: 50px;">
+              <strong>Imagen</strong> <!-- Texto indicando que es una imagen -->
+            </div>
+            <!-- Botón para eliminar la imagen -->
+            <button class="btn btn-danger btn-sm" (click)="deleteImage(image.id, image.url)">Eliminar</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  

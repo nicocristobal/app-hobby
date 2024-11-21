@@ -1,0 +1,4 @@
+.carousel img {
+    max-height: 400px; /* Ajusta este valor a la altura deseada */
+    object-fit: cover; /* Ajusta cómo se recorta la imagen si la proporción es diferente */
+  }

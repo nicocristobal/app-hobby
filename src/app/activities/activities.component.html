@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header text-center">
+      <h2>Actividades de la Categoría {{ categoryName }}</h2>
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let activity of activities">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ activity.name }}</h5>
+              <p class="card-text">{{ activity.description }}</p>
+              <p class="card-text">
+                <strong>Fecha:</strong> {{ activity.date | date: 'shortDate' }} 
+                <strong>Hora:</strong> {{ activity.time }}
+              </p>
+              <!-- Botón de "Like" -->
+              <button 
+                class="btn" 
+                [ngClass]="activity.liked ? 'btn-success' : 'btn-outline-success'"
+                (click)="likeActivity(activity)">
+                {{ activity.liked ? 'Liked' : 'Like' }} <!-- Cambiar el texto del botón -->
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
